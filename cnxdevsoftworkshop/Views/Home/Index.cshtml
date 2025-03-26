@@ -1,0 +1,163 @@
+﻿@{
+    ViewData["Title"] = "Calculator";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        /*body {*/
+        /*    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+        /*    background-color: #e0f7fa;*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*}*/
+
+        .container {
+            max-width: 700px;
+            margin:  auto;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #00796b;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-top: 15px;
+        }
+
+        input[type="number"],
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 6px;
+            border: 1px solid #b0bec5;
+            font-size: 1.1em;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        .history {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #e0f2f1;
+            border-radius: 10px;
+            border: 1px solid #b0bec5;
+        }
+
+        .history ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .history li {
+            padding: 8px 0;
+            border-bottom: 1px solid #b0bec5;
+        }
+
+        .history li:last-child {
+            border-bottom: none;
+        }
+
+        .result {
+            background-color: #e0f2f1;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 25px;
+            border-radius: 10px;
+            border: 1px solid #b0bec5;
+        }
+
+        .clear-btn {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            font-weight: bold;
+            padding: 12px 25px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 25px;
+        }
+
+        .clear-btn:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Simple Calculator</h2>
+
+    
+    <form method="post" asp-action="Index">
+        <label for="x">Number 1:</label>
+        
+        <input type="number" id="x" name="x" step="0.01" required />
+        
+
+        <label for="operation">Select Operation:</label>
+        <select name="operation" required>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+
+        <label for="y">Number 2:</label>
+        <input type="number" id="y" name="y" step="0.01" required />
+
+        <button type="submit">Calculate</button>
+    </form>
+
+ 
+    <form method="post" asp-action="ClearHistory">
+        <button type="submit" class="clear-btn">Clear History</button>
+    </form>
+
+
+    @if (ViewData["Result"] != null)
+    {
+        <div class="result">
+            <h3>Latest Result: @ViewData["Result"]</h3>
+        </div>
+    }
+
+   
+    @if (ViewData["History"] != null)
+    {
+        var history = ViewData["History"] as List<string>;
+        <div class="history">
+            <h3>Calculation History:</h3>
+            <ul>
+                @foreach (var item in history)
+                {
+                    <li>@item</li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+</body>
+</html>
