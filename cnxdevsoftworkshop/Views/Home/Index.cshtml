@@ -109,8 +109,6 @@
 <body>
 <div class="container">
     <h2>Simple Calculator</h2>
-
-    
     <form method="post" asp-action="Index">
         <label for="x">Number 1:</label>
         
@@ -135,8 +133,6 @@
     <form method="post" asp-action="ClearHistory">
         <button type="submit" class="clear-btn">Clear History</button>
     </form>
-
-
     @if (ViewData["Result"] != null)
     {
         <div class="result">

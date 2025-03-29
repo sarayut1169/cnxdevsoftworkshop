@@ -66,14 +66,10 @@ public class HomeController : Controller
                     ViewData["Result"] = "Invalid operation.";
                     return View();
             }
-
-       
             calculationHistory.Add(calculationResult);
-
             Console.WriteLine("result : " + result);
             ViewData["Result"] = result;
             ViewData["History"] = calculationHistory;
-
             return View();
         }
         catch (Exception e)
@@ -81,7 +77,6 @@ public class HomeController : Controller
             Console.WriteLine(e);
             throw;
         }
-         
     }
 
 
